@@ -1,5 +1,6 @@
 import requests, json
 import pandas as pd
+import matplotlib.pyplot as plt
 
 url = "https://wind-bow.glitch.me/twitch-api/channels/freecodecamp"
 JSONContent = requests.get(url).json()
@@ -32,3 +33,18 @@ dataset.columns = ['id', 'Name', 'Status', 'Followers', 'Views', 'URL', 'Languag
 dataset.dropna(axis = 0, how= 'any', inplace=True)
 dataset.index = pd.RangeIndex(len(dataset.index))
 dataset.to_csv('twitchRequest.csv', ',')
+
+x = dataset['Name']
+y = dataset['Followers']
+
+plt.bar(x, y, align='center', alpha=0.5)
+
+plt.title('TWITCH REQUEST')
+plt.xlabel('Channel Name', rotation=90)
+plt.ylabel('Number of Followers')
+plt.xticks(rotation=90)
+
+plt.show()
+
+
+
